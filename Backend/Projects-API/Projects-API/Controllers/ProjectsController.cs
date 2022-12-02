@@ -26,7 +26,7 @@ namespace Projects_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProject([FromBody] Project projectRequest)
         {
-            projectRequest.Id= Guid.NewGuid();
+            
             await _context.Projects.AddAsync(projectRequest);
             await _context.SaveChangesAsync();
 
