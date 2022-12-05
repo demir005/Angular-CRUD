@@ -1,10 +1,13 @@
-﻿namespace Projects_API.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Projects_API.Models
 {
     public class Project
     {
-        public string Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public DateTime Created { get; set; } = DateTime.Now;
+        [Key]
+        public Guid Id { get; set; }
+        public string Name { get; set; } 
+        public DateTime Created { get; set; }
 
     }
 }
