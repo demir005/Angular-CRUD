@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { ProjectListComponent } from './components/Projects/project-list/project-list.component';
 import { AddProjectComponent } from './components/Projects/add-project/add-project.component';
 import { FormsModule } from '@angular/forms';
+import { EditProjectComponent } from './components/Projects/edit-project/edit-project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectListComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    EditProjectComponent
   ],
   imports: [
     BrowserModule,

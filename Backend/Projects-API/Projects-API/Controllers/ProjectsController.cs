@@ -26,11 +26,25 @@ namespace Projects_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProject([FromBody] Project projectRequest)
         {
-            projectRequest.Id = Guid.NewGuid();
+            
             await _context.Projects.AddAsync(projectRequest);
             await _context.SaveChangesAsync();
 
             return Ok(projectRequest);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetEmployee([FromRoute]string Id)
+        {
+           var project =
+                await _context.Projects.FirstOrDefaultAsync(p => p.Id == Id);
+            if(project == null)
+            {
+                return NotFound();
+            }
+            return Ok(project);
+
         }
     }
 }

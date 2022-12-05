@@ -23,7 +23,7 @@ export class AddProjectComponent implements OnInit  {
   addProject(){
    this.projectService.addProject(this.addProjectRequest)
    .subscribe({
-    next: (projects) =>{
+    next: () =>{
       this.router.navigate(['projects']);
     }
    });

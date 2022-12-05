@@ -5,12 +5,13 @@
         <thead>
             <th>Name</th>
             <th>Created</th>
+            <th> </th>
         </thead>
         <tbody>
             <tr *ngFor="let project of projects">
                 <td>{{project.name}}</td>
                 <td>{{project.created}}</td>
-                <td></td>
+                <td><a [routerLink]="['/projects','edit',project.id]">View</a></td>
             </tr>
         </tbody>
     </table>
