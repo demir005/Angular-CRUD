@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Projects } from 'src/app/models/project.model';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-project',
@@ -16,7 +17,8 @@ export class EditProjectComponent implements OnInit{
     created: new Date()
   };
 
-  constructor(private route: ActivatedRoute, private projectService : ProjectsService){
+  constructor(private route: ActivatedRoute, private projectService : ProjectsService,
+         private router: Router){
 
   }
 
@@ -37,5 +39,22 @@ export class EditProjectComponent implements OnInit{
       }
     })
   }
+  
+  updateProject(){
+    this.projectService.updateProject(this.projectDetails.id, this.projectDetails)
+    .subscribe({
+      next: (response) => {
+        this.router.navigate(['projects']);
+      }
+    });
+  }
 
+  deleteProject(id:string){
+    this.projectService.deleteProject(id)
+    .subscribe({
+       next: (response) => {
+        this.router.navigate(['projects']);
+       }
+    });
+  }
 }

@@ -23,4 +23,12 @@ export class ProjectsService {
   getProject(id: string): Observable<Projects>{
     return this.http.get<Projects> (this.baseApiUrl + '/api/projects/'+id);
   }
+
+  updateProject(id:string, updateProjectRequest: Projects): Observable<Projects>{
+    return this.http.put<Projects>(this.baseApiUrl + '/api/projects/'+id, updateProjectRequest);
+  }
+
+  deleteProject(id: string): Observable<Projects>{
+    return this.http.delete<Projects>(this.baseApiUrl + '/api/projects/'+id);
+  }
 }

@@ -26,7 +26,7 @@ namespace Projects_API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProject([FromBody] Project projectRequest)
         {
-            
+
             await _context.Projects.AddAsync(projectRequest);
             await _context.SaveChangesAsync();
 
@@ -35,16 +35,47 @@ namespace Projects_API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetEmployee([FromRoute]string Id)
+        public async Task<IActionResult> GetProject([FromRoute] string Id)
         {
-           var project =
-                await _context.Projects.FirstOrDefaultAsync(p => p.Id == Id);
-            if(project == null)
+            var project =
+                 await _context.Projects.FirstOrDefaultAsync(p => p.Id == Id);
+            if (project == null)
             {
                 return NotFound();
             }
             return Ok(project);
 
+        }
+
+        [HttpPut]
+        [Route("id")]
+        public async Task<IActionResult> UpdateProject([FromRoute] string Id, Project updateProjectRequest)
+        {
+            var project = await _context.Projects.FindAsync(Id);
+
+            if (project == null)
+            {
+                return NotFound();
+            }
+            project.Id = updateProjectRequest.Id;
+            project.Name = updateProjectRequest.Name;
+            project.Created = updateProjectRequest.Created;
+
+            await _context.SaveChangesAsync();
+            return Ok(project);
+        }
+
+        [HttpDelete]
+        [Route("id")]
+        public async Task<IActionResult> DeleteProject([FromRoute] string Id)
+        {
+            var project = await _context.Projects.FindAsync(Id);
+
+            if (project == null) { return NotFound(); }
+
+            _context.Projects.Remove(project);
+            await _context.SaveChangesAsync();
+            return Ok(project);
         }
     }
 }
